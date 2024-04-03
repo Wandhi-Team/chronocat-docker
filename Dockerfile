@@ -82,13 +82,17 @@ RUN echo "x11vnc -display :1 -noxrecord -noxfixes -noxdamage -forever -rfbauth ~
 RUN echo "nohup /opt/noVNC/utils/novnc_proxy --vnc localhost:5900 --listen 6081 --file-only &" >> ~/start.sh
 RUN echo "x11vnc -storepasswd \$VNC_PASSWD ~/.vnc/passwd" >> ~/start.sh
 RUN echo "su -c 'qq' root" >> ~/start.sh
+RUN echo "exec supervisord &" >> ~/start.sh
 RUN chmod +x ~/start.sh
 
 # 配置supervisor
 RUN echo "[supervisord]" > /etc/supervisor/supervisord.conf
 RUN echo "nodaemon=true" >> /etc/supervisor/supervisord.conf
 RUN echo "[program:x11vnc]" >> /etc/supervisor/supervisord.conf
-RUN echo "command=/usr/bin/x11vnc -display :1 -noxrecord -noxfixes -noxdamage -forever -rfbauth ~/.vnc/passwd" >> /etc/supervisor/supervisord.conf
+RUN echo "command=/usr/bin/x11vnc -display :1 -noxrecord -noxfixes -noxdamage -forever -rfbauth ~/.vnc/passwd" >> /etc/supervisor/supervisord.conf \
+RUN echo "[program:qq]" >> /etc/supervisor/supervisord.conf
+RUN echo "command=qq --no-sandbox" >> /etc/supervisor/supervisord.conf
+RUN echo 'environment=DISPLAY=":1"' >> /etc/supervisor/supervisord.conf
 
 # 设置容器启动时运行的命令
 CMD ["/bin/bash", "-c", "/root/start.sh"]
