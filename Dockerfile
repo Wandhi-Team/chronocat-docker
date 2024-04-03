@@ -1,5 +1,5 @@
 # 使用基于Ubuntu 22.04的基础映像
-FROM ubuntu_chronocat:latest
+FROM maxzhang666/ubuntu_chronocat:latest
 
 # 安装Linux QQ
 RUN curl -o /root/QQ_3.2.5_240305_amd64_01.deb https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.5_240305_amd64_01.deb
