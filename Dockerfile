@@ -2,7 +2,6 @@
 FROM maxzhang666/ubuntu_chronocat:latest
 
 # 设置环境变量
-ENV DEBIAN_FRONTEND=noninteractive
 ENV VNC_PASSWD=vncpasswd
 
 # 安装chronocat  
