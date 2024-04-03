@@ -38,8 +38,9 @@ RUN curl -o /root/QQ_3.2.5_240305_amd64_01.deb https://dldir1.qq.com/qqfile/qq/Q
 RUN dpkg -i /root/QQ_3.2.5_240305_amd64_01.deb && apt-get -f install -y && rm /root/QQ_3.2.5_240305_amd64_01.deb
 
 # 安装LiteLoader
-RUN curl -L -o /tmp/LiteLoaderQQNT.zip https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/1.0.3/LiteLoaderQQNT.zip 
-RUN unzip /tmp/LiteLoaderQQNT.zip -d /opt/QQ/resources/app/
+RUN curl -L -o /tmp/LiteLoaderQQNT.zip https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/1.0.3/LiteLoaderQQNT.zip
+RUN mkdir -p /opt/QQ/resources/app/LiteLoader 
+RUN unzip /tmp/LiteLoaderQQNT.zip -d /opt/QQ/resources/app/LiteLoader
 RUN rm /tmp/LiteLoaderQQNT.zip
 # 修改/opt/QQ/resources/app/package.json文件
 RUN sed -i 's/"main": ".\/app_launcher\/index.js"/"main": ".\/LiteLoader"/' /opt/QQ/resources/app/package.json
