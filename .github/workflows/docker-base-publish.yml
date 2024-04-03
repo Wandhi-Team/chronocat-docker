@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - 'Dockerfile'
+      - 'Dockerfile_base'
 
 jobs:
   publish:
@@ -25,10 +25,6 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Set environment variables
-        run: |
-          echo "DOCKER_IMAGE_TAG=maxzhang666/chronocat-docker:latest" >> $GITHUB_ENV
-
       - name: Check Dockerfile changes
         id: dockerfile-changed
         run: |
@@ -40,10 +36,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push chronocat-docker
+      - name: Build and push ubuntu
         if: steps.dockerfile-changed.outputs.changed == 'true'
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: ./Dockerfile_base
           push: true
-          tags: ${{ env.DOCKER_IMAGE_TAG }}
+          tags: maxzhang666/ubuntu_chronocat

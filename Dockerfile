@@ -2,14 +2,14 @@
 FROM maxzhang666/ubuntu_chronocat:latest
 
 # 安装Linux QQ
-RUN curl -o /root/QQ_3.2.5_240305_amd64_01.deb https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.5_240305_amd64_01.deb
-RUN dpkg -i /root/QQ_3.2.5_240305_amd64_01.deb && apt-get -f install -y && rm /root/QQ_3.2.5_240305_amd64_01.deb
+RUN curl -o /root/QQ_3.2.5_240305_amd64_01.deb https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.5_240305_amd64_01.deb \
+    && dpkg -i /root/QQ_3.2.5_240305_amd64_01.deb && apt-get -f install -y && rm /root/QQ_3.2.5_240305_amd64_01.deb
 
 # 安装LiteLoader
-RUN curl -L -o /tmp/LiteLoaderQQNT.zip https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/1.0.3/LiteLoaderQQNT.zip
-RUN mkdir -p /opt/QQ/resources/app/LiteLoader 
-RUN unzip /tmp/LiteLoaderQQNT.zip -d /opt/QQ/resources/app/LiteLoader
-RUN rm /tmp/LiteLoaderQQNT.zip
+RUN curl -L -o /tmp/LiteLoaderQQNT.zip https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/1.0.3/LiteLoaderQQNT.zip \
+     && mkdir -p /opt/QQ/resources/app/LiteLoader \
+     && unzip /tmp/LiteLoaderQQNT.zip -d /opt/QQ/resources/app/LiteLoader \
+    && rm /tmp/LiteLoaderQQNT.zip
 # 修改/opt/QQ/resources/app/package.json文件
 RUN sed -i 's/"main": ".\/app_launcher\/index.js"/"main": ".\/LiteLoader"/' /opt/QQ/resources/app/package.json
 
@@ -41,13 +41,13 @@ RUN rm /tmp/LLWebUiApi.zip
 RUN mkdir -p ~/.vnc
 
 # 创建启动脚本
-RUN echo "#!/bin/bash" > ~/start.sh
-RUN echo "rm /tmp/.X1-lock" >> ~/start.sh
-RUN echo "Xvfb :1 -screen 0 1280x1024x16 &" >> ~/start.sh
+RUN echo "#!/bin/bash" > ~/start.sh \
+&& echo "rm /tmp/.X1-lock" >> ~/start.sh \
+&& echo "Xvfb :1 -screen 0 1280x1024x16 &" >> ~/start.sh
 RUN echo "export DISPLAY=:1" >> ~/start.sh
 RUN echo "fluxbox &" >> ~/start.sh
 RUN echo "x11vnc -display :1 -noxrecord -noxfixes -noxdamage -forever -rfbauth ~/.vnc/passwd &" >> ~/start.sh
-RUN echo "nohup /opt/noVNC/utils/novnc_proxy --vnc localhost:5900 --listen 6081 --file-only &" >> ~/start.sh
+RUN echo "/opt/noVNC/utils/novnc_proxy --vnc localhost:5900 --listen 6081 --file-only &" >> ~/start.sh
 RUN echo "x11vnc -storepasswd \$VNC_PASSWD ~/.vnc/passwd" >> ~/start.sh
 RUN #echo "su -c 'qq' root" >> ~/start.sh
 RUN echo "exec supervisord &" >> ~/start.sh
