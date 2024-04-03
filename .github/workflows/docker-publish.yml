@@ -42,7 +42,7 @@ jobs:
         if: steps.dockerfile-changed.outputs.changed == 'true'
         uses: docker/build-push-action@v2
         with:
-          context: ./Dockerfile_base
+          context: Dockerfile_base
           push: true
           tags: maxzhang666/ubuntu_chronocat
 
