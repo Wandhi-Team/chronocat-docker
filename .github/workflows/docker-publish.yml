@@ -25,7 +25,7 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "DOCKER_IMAGE_TAG=yuukinya/chronocat-docker:latest" >> $GITHUB_ENV
+          echo "DOCKER_IMAGE_TAG=maxzhang666/chronocat-docker:latest" >> $GITHUB_ENV
 
       - name: Check Dockerfile changes
         id: dockerfile-changed
