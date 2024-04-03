@@ -35,12 +35,13 @@ RUN mkdir -p ~/.vnc
 RUN echo "#!/bin/bash" > ~/start.sh \
     && echo "x11vnc -storepasswd \$VNC_PASSWD /root/.vnc/passwd" >> ~/start.sh \
     && echo "rm /tmp/.X1-lock" >> ~/start.sh \
+    && echo "mkdir -p /var/run/dbus &" >> ~/start.sh \
+    && echo "dbus-daemon --config-file=/usr/share/dbus-1/system.conf --print-address &" >> ~/start.sh \
     && echo "Xvfb :1 -screen 0 1280x1024x16 &" >> ~/start.sh \
-    && echo "export DISPLAY=:1" >> ~/start.sh \
     && echo "fluxbox &" >> ~/start.sh \
-#    && echo "x11vnc -display :1 -noxrecord -noxfixes -noxdamage -forever -rfbauth ~/.vnc/passwd &" >> ~/start.sh \
     && echo "/opt/noVNC/utils/novnc_proxy --vnc localhost:5900 --listen 6081 --file-only &" >> ~/start.sh \
     #&& #echo "su -c 'qq' root" >> ~/start.sh \
+    && echo "export DISPLAY=:1" >> ~/start.sh \
     && echo "exec supervisord" >> ~/start.sh
 RUN chmod +x ~/start.sh
 
