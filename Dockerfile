@@ -34,8 +34,8 @@ RUN cd opt/noVNC/utils && git clone https://github.com/novnc/websockify.git
 RUN cp /opt/noVNC/vnc.html /opt/noVNC/index.html     
 
 # 安装Linux QQ
-RUN curl -o /root/QQ_3.2.5_240305_arm64_01.deb https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.5_240305_amd64_01.deb
-RUN dpkg -i /root/QQ_3.2.5_240305_arm64_01.deb && apt-get -f install -y && rm /root/QQ_3.2.5_240305_amd64_01.deb
+RUN curl -o /root/QQ_3.2.5_240305_amd64_01.deb https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.5_240305_amd64_01.deb
+RUN dpkg -i /root/QQ_3.2.5_240305_amd64_01.deb && apt-get -f install -y && rm /root/QQ_3.2.5_240305_amd64_01.deb
 
 # 安装LiteLoader
 RUN curl -L -o /tmp/LiteLoaderQQNT.zip https://mirror.ghproxy.com/https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/1.0.3/LiteLoaderQQNT.zip \
