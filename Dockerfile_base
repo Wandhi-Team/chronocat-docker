@@ -1,5 +1,6 @@
 # 使用基于Ubuntu 22.04的基础映像
 FROM ubuntu:22.04
+ENV DEBIAN_FRONTEND=noninteractive
 
 # 安装必要的软件包
 RUN apt-get update && apt-get install -y \
