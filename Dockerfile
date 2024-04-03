@@ -49,6 +49,8 @@ RUN echo "[supervisord]" > /etc/supervisor/supervisord.conf \
     && echo "nodaemon=true" >> /etc/supervisor/supervisord.conf \
     && echo "[program:x11vnc]" >> /etc/supervisor/supervisord.conf \
     && echo "command=/usr/bin/x11vnc -display :1 -noxrecord -noxfixes -noxdamage -forever -rfbauth ~/.vnc/passwd" >> /etc/supervisor/supervisord.conf \
+    && echo "stdout_logfile=~/.vnc/passwd/log/vnc.out.log" >> /etc/supervisor/supervisord.conf \
+    && echo "stderr_logfile=~/.vnc/passwd/log/vnc.err.log" >> /etc/supervisor/supervisord.conf \
     && echo "[program:qq]" >> /etc/supervisor/supervisord.conf \
     && echo "command=qq --no-sandbox" >> /etc/supervisor/supervisord.conf \
     && echo 'environment=DISPLAY=":1"' >> /etc/supervisor/supervisord.conf
