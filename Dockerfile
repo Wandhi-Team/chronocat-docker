@@ -33,7 +33,7 @@ RUN mkdir -p ~/.vnc
 
 # 创建启动脚本
 RUN echo "#!/bin/bash" > ~/start.sh \
-    && echo "x11vnc -storepasswd \$VNC_PASSWD ~/.vnc/passwd" >> ~/start.sh \
+    && echo "x11vnc -storepasswd \$VNC_PASSWD /root/.vnc/passwd" >> ~/start.sh \
     && echo "rm /tmp/.X1-lock" >> ~/start.sh \
     && echo "Xvfb :1 -screen 0 1280x1024x16 &" >> ~/start.sh \
     && echo "export DISPLAY=:1" >> ~/start.sh \
@@ -48,7 +48,7 @@ RUN chmod +x ~/start.sh
 RUN echo "[supervisord]" > /etc/supervisor/supervisord.conf \
     && echo "nodaemon=true" >> /etc/supervisor/supervisord.conf \
     && echo "[program:x11vnc]" >> /etc/supervisor/supervisord.conf \
-    && echo "command=/usr/bin/x11vnc -display :1 -noxrecord -noxfixes -noxdamage -forever -rfbauth ~/.vnc/passwd" >> /etc/supervisor/supervisord.conf \
+    && echo "command=/usr/bin/x11vnc -display :1 -noxrecord -noxfixes -noxdamage -forever -rfbauth /root/.vnc/passwd" >> /etc/supervisor/supervisord.conf \
     && echo "stdout_logfile=~/.vnc/vnc.out.log" >> /etc/supervisor/supervisord.conf \
     && echo "stderr_logfile=~/.vnc/vnc.err.log" >> /etc/supervisor/supervisord.conf \
     && echo "[program:qq]" >> /etc/supervisor/supervisord.conf \
