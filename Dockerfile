@@ -5,20 +5,20 @@ FROM maxzhang666/ubuntu_chronocat:latest
 ENV VNC_PASSWD=vncpasswd
 
 # 安装chronocat  
-RUN mkdir -p /root/LiteLoaderQQNT/plugins
-RUN curl -L -o /tmp/chronocat-llqqnt-engine-chronocat-api.zip https://github.com/chrononeko/chronocat/releases/download/v0.2.6/chronocat-llqqnt-engine-chronocat-api-v0.2.6.zip
-RUN curl -L -o /tmp/chronocat-llqqnt-engine-chronocat-event.zip https://github.com/chrononeko/chronocat/releases/download/v0.2.6/chronocat-llqqnt-engine-chronocat-event-v0.2.6.zip
-RUN curl -L -o /tmp/chronocat-llqqnt-engine-poke.zip https://github.com/chrononeko/LiteLoaderQQNT-Plugin-Chronocat-Engine-Poke/archive/refs/heads/master.zip
-RUN curl -L -o /tmp/chronocat-llqqnt.zip https://github.com/chrononeko/chronocat/releases/download/v0.2.6/chronocat-llqqnt-v0.2.6.zip
-RUN unzip /tmp/chronocat-llqqnt.zip -d /root/LiteLoaderQQNT/plugins/
-RUN unzip /tmp/chronocat-llqqnt-engine-chronocat-api.zip  -d /opt/QQ/resources/app/LiteLoader/plugins/
-RUN unzip /tmp/chronocat-llqqnt-engine-chronocat-event.zip  -d /opt/QQ/resources/app/LiteLoader/plugins/
-RUN unzip /tmp/chronocat-llqqnt-engine-poke.zip -d /opt/QQ/resources/app/LiteLoader/plugins/
-RUN unzip /tmp/chronocat-llqqnt.zip -d /opt/QQ/resources/app/LiteLoader/plugins/
-RUN rm /tmp/chronocat-llqqnt.zip
-RUN rm /tmp/chronocat-llqqnt-engine-chronocat-api.zip
-RUN rm /tmp/chronocat-llqqnt-engine-chronocat-event.zip
-RUN rm /tmp/chronocat-llqqnt-engine-poke.zip
+RUN mkdir -p /root/LiteLoaderQQNT/plugins \
+&& curl -L -o /tmp/chronocat-llqqnt-engine-chronocat-api.zip https://github.com/chrononeko/chronocat/releases/download/v0.2.6/chronocat-llqqnt-engine-chronocat-api-v0.2.6.zip \
+&& curl -L -o /tmp/chronocat-llqqnt-engine-chronocat-event.zip https://github.com/chrononeko/chronocat/releases/download/v0.2.6/chronocat-llqqnt-engine-chronocat-event-v0.2.6.zip \
+&& curl -L -o /tmp/chronocat-llqqnt-engine-poke.zip https://github.com/chrononeko/LiteLoaderQQNT-Plugin-Chronocat-Engine-Poke/archive/refs/heads/master.zip \
+&& curl -L -o /tmp/chronocat-llqqnt.zip https://github.com/chrononeko/chronocat/releases/download/v0.2.6/chronocat-llqqnt-v0.2.6.zip \
+&& unzip /tmp/chronocat-llqqnt.zip -d /root/LiteLoaderQQNT/plugins/ \
+&& unzip /tmp/chronocat-llqqnt-engine-chronocat-api.zip  -d /opt/QQ/resources/app/LiteLoader/plugins/ \
+&& unzip /tmp/chronocat-llqqnt-engine-chronocat-event.zip  -d /opt/QQ/resources/app/LiteLoader/plugins/ \
+&& unzip /tmp/chronocat-llqqnt-engine-poke.zip -d /opt/QQ/resources/app/LiteLoader/plugins/ \
+&& unzip /tmp/chronocat-llqqnt.zip -d /opt/QQ/resources/app/LiteLoader/plugins/ \
+&& rm /tmp/chronocat-llqqnt.zip \
+&& rm /tmp/chronocat-llqqnt-engine-chronocat-api.zip \
+&& rm /tmp/chronocat-llqqnt-engine-chronocat-event.zip \
+&& rm /tmp/chronocat-llqqnt-engine-poke.zip
 
 # 安装LLWebUiApi
 RUN mkdir -p /opt/QQ/resources/app/LiteLoader/plugins/LLWebUiApi
